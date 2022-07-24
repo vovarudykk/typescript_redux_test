@@ -7,14 +7,16 @@ import { ITodo } from "../types/types";
 const TodosPage: FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchTodos();
-  }, [])
+  }, []);
 
   async function fetchTodos() {
     try {
-      const responce = await axios.get<ITodo[]>('https://jsonplaceholder.typicode.com/todos?_limit=5');
-      setTodos(responce.data)
+      const responce = await axios.get<ITodo[]>(
+        "https://jsonplaceholder.typicode.com/todos?_limit=5"
+      );
+      setTodos(responce.data);
     } catch (error) {
       alert(error);
     }
@@ -22,9 +24,9 @@ const TodosPage: FC = () => {
 
   return (
     <div>
-      <List 
-        items={todos} 
-        renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id}/>}
+      <List
+        items={todos}
+        renderItem={(todo: ITodo) => <TodoItem todo={todo} key={todo.id} />}
       />
     </div>
   );

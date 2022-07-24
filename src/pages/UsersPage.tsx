@@ -9,14 +9,16 @@ const UsersPage: FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const navigate = useNavigate();
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchUsers();
-  }, [])
+  }, []);
 
   async function fetchUsers() {
     try {
-      const responce = await axios.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
-      setUsers(responce.data)
+      const responce = await axios.get<IUser[]>(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      setUsers(responce.data);
     } catch (error) {
       alert(error);
     }
@@ -24,9 +26,15 @@ const UsersPage: FC = () => {
 
   return (
     <div>
-      <List 
-        items={users} 
-        renderItem={(user: IUser) => <UserItem onClick={(user) => navigate(`/user/${user.id}`)} user={user} key={user.id}/>}
+      <List
+        items={users}
+        renderItem={(user: IUser) => (
+          <UserItem
+            onClick={(user) => navigate(`/user/${user.id}`)}
+            user={user}
+            key={user.id}
+          />
+        )}
       />
     </div>
   );
